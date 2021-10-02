@@ -1,0 +1,92 @@
+openapi: 3.0.2
+info:
+  description: "Virtual Shopping Generator. Generate "
+  version: "1.0.0"
+  title: "Swagger Shopping generator"
+  contact:
+    email: "invents@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+
+tags:
+  - name: "shopping"
+    description: "Info about a shopping"
+
+paths:
+  /shopping:
+    get:
+      tags:
+        - "shooping"
+      summary: "Get all shoppings"
+      description: "returns random shoppings"
+      operationId: "getShoppings"
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Shopping"
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "400":
+          description: "Invalid status value"
+components:
+  schemas:
+    Shopping:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          format: "int64"
+        person:
+          $ref: '#/components/schemas/Person'
+        products:
+          type: "array"
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Product'
+        registerTimestamp:
+          type: "integer"
+          format: "int64"
+        totalPrice:
+          type: "integer"
+          format: "int64"
+    Person:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+    Product:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        title:
+          type: "string"
+        price:
+          type: "integer"
+          format: "int64"
+    Error:
+      type: "object"
+      properties:
+        code:
+          type: "integer"
+          format: "int32"
+        message:
+          type: "string"
+  responses:
+    NotFound:
+      description: "No results found"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
