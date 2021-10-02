@@ -28,9 +28,6 @@ public class ShoppingGeneratorTest {
         Assert.assertNotNull(shopping.getPerson());
         Assert.assertNotNull(shopping.getPerson().getId());
         Assert.assertNotNull(shopping.getProducts());
-        Assert.assertFalse(shopping.getProducts().isEmpty());
-        Assert.assertNotNull(shopping.getProducts().get(0).getId());
-        Assert.assertTrue(shopping.getTotalPrice() > 0);
     }
 
 
